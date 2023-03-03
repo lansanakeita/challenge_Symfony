@@ -25,21 +25,19 @@ class UserCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-        ->add(Crud::PAGE_INDEX, Action::DETAIL)
-        ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action){
-            return $action->setIcon('fa fa-user')->addCssClass('px-3 py-2');
-        })
-        ->update(Crud::PAGE_INDEX,Action::EDIT,function(Action $action){
-            return $action->setIcon('fa fa-edit');
-        })
-        ->update(Crud::PAGE_INDEX,Action::DETAIL,function(Action $action){
-            return $action->setIcon('fa fa-eye');
-        })
-        ->update(Crud::PAGE_INDEX,Action::DELETE,function(Action $action){
-            return $action->setIcon('fa fa-trash');
-        });
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action->setIcon('fa fa-edit');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
+                return $action->setIcon('fa fa-eye');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action->setIcon('fa fa-trash');
+            });
     }
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -51,19 +49,17 @@ class UserCrudController extends AbstractCrudController
                     'ADMIN' => 'ROLE_ADMIN',
                 ])
                 ->setRequired(isRequired: false)
-                ->allowMultipleChoices()
-            ,
+                ->allowMultipleChoices(),
             TextField::new('firstName'),
             TextField::new('lastName'),
             ChoiceField::new('sexe')->setChoices([
                 'Homme' => 'homme',
                 'Femme' => 'femme',
-            ]),    
+            ]),
             IntegerField::new('taille'),
             NumberField::new('poids'),
             DateField::new('naissance'),
-           
+
         ];
     }
-    
 }
