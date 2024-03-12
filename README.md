@@ -6,7 +6,7 @@ MyFitLog est une application de surveillance de la santé qui accompagne les uti
 
   - **Visualisation des données** : l'application comprend des graphiques et tableaux pour vous aider à visualiser vos progrès. Vous pouvez personnaliser les tableaux en fonction de vos préférences pour mieux suivre vos mesures. Avec MyFitLog, vous pouvez suivre votre santé et votre condition physique en un seul endroit.
 
-  ![Exemple de graph de l'application](public/assets/images/graph.png)
+  ![Exemple de graph de l'application](public/assets/images/Dashboard.png)
 
 
 ---
