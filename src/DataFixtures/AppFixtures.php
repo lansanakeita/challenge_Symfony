@@ -30,25 +30,29 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $users = [];
-        for ($i=0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user =  new User();
             $user->setFirstName($this->faker->firstName);
             $user->setLastName($this->faker->lastName);
             $user->setEmail($this->faker->safeEmail);
+            $user->setSexe($this->faker->randomElement(['homme', 'femme']));
+            $user->setTaille($this->faker->numberBetween(160, 201));
+            $user->setPoids($this->faker->numberBetween(40, 120));
+            $user->setNaissance($this->faker->dateTimeBetween('1998-01-01', '2015-01-01'));
             $user->setPassword(
-                password_hash("123456", PASSWORD_BCRYPT)
+                password_hash("passer123", PASSWORD_BCRYPT)
             );
             array_push($users, $user);
             $manager->persist($user);
         }
 
-        for ($i=0; $i < 2; $i++) { 
+        for ($i = 0; $i < 2; $i++) {
             $categorie = new Domaine();
             $categorie->setLibelle('categorie' . ' ' . $i);
             $manager->persist($categorie);
         }
 
-        for ($i=0; $i < 12; $i++) { 
+        for ($i = 0; $i < 12; $i++) {
             $lib = new Libelle();
             $unites_de_mesure = array('mètre', 'kilogramme', 'hectare', 'heure', 'kcal', 'pas', 'kilometre');
             $unite_de_mesure = $this->faker->randomElement($unites_de_mesure);
@@ -56,14 +60,14 @@ class AppFixtures extends Fixture
             $lib->setUnit($unite_de_mesure);
             if ($this->domaineRepository->findBy(['id' => rand(0, count($this->domaineRepository->findAll()))])) {
                 $lib->setDomaine($this->domaineRepository->findBy(['id' => rand(0, count($this->domaineRepository->findAll()))])[0]);
-            }else {
+            } else {
                 continue;
             }
             $manager->persist($lib);
         }
 
 
-        for ($i=0; $i < 100; $i++) { 
+        for ($i = 0; $i < 100; $i++) {
             $history = new Historique();
             $libelle = $this->libelleRepository->findBy(['id' => rand(0, count($this->libelleRepository->findAll()))]);
             if (!$libelle) {
@@ -75,7 +79,7 @@ class AppFixtures extends Fixture
             }
             $userId = rand(0, 20);
             $history->setUser($users[$userId]);
-            $history->setValeur(rand(0,1000));
+            $history->setValeur(rand(0, 1000));
             $history->setLibelle($libelle[0]);
             $history->setDomaine($domaine[0]);
             $history->setCreatedAt($this->faker->dateTime());
