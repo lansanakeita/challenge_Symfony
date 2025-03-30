@@ -67,8 +67,5 @@ php bin/console assign-room
 ## Group members
 1. _VOUVOU Brandon_
 2. _KEITA Lansana_
-3. _FAUVET Laura_
-4. _NFONO NDONG Erica Grace_
-
 
 **NB :** La modification et la suppression des utilisateurs n'est pas possible.
